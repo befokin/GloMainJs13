@@ -1,0 +1,3 @@
+function outputMessage() {
+      console.log()
+}
