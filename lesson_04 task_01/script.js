@@ -14,18 +14,13 @@ showTypeOf(money);
 let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую?');
 console.log(addExpenses.toLowerCase().split(', '));
 
-showTypeOf(addExpenses);
-
 let deposit = confirm('Есть ли у вас депозит в банке?');
-showTypeOf(deposit);
 
 let expenses1 = prompt('Введите обязательную статью расходов');
-showTypeOf(expenses1);
 
 let expenses2 = prompt('Введите обязательную статью расходов');
 
 let amount1 = +prompt('Во сколько это обойдется?');
-showTypeOf(amount1);
 
 let amount2 = +prompt('Во сколько это обойдется?');
 
