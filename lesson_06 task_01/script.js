@@ -1,67 +1,29 @@
 'use strict';
 
+// Функция проверки на число
+let isNumber = function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
 
+// 
+const guessNumber = function (number) { // (1)  объявляем глобальную переменную guessNumber
+ 
+    let userNumber = prompt('Угадай число от 1 до 100'); // (2)  задаем вопрос пользователю и результат присваеваем в переменную  userNumber
 
+    if (!isNumber(userNumber) && userNumber !== null) { // (3)  проверяем переменную userNumber(то что ввел пользователь) на число и кнопку 'отмена'
+        alert('Введи число!'); // (4)  выводим сообщение пользователю, если пользователь написал не число и не нажал 'отмена'
+        guessNumber(32); // (5)  вызываем ф-ию 
+    } else if (!!(+userNumber)) { // (6)  проверяем на число 
+        if (userNumber > number) { // (7)  если то что ввел пользователь больше 32
+            alert('Загаданное число меньше!'); // (8)  выводим сообщение пользователю
+            guessNumber(32); // (9)  вызываем ф-ию
+        } else if (userNumber < number) { // (10)  если пользовательское число меньше загаданного 
+            alert('Загаданное число больше!'); // (11)  выводим сообщение пользователю
+            guessNumber(32); // (12) вызываем ф-ию
+        } else { // (13) иначе 
+            alert(`Поздравляем! Загаданное число: ${number}`); // (14)  выводим сообщение пользователю с загаданным числом. Программа завершается.
+        }
+    }
+};
 
-
-
-function one() {
-let asking = prompt('Угадай число от 1 до 100');
-
-
-      if (asking >= 100) {
-            alert('Загаданное число меньше');
-            
-                        
-                  function askOneMore() {
-                  let asking = confirm('Введите новый вариант');
-                        if (asking === true) {
-                              return one();
-                        }
-                  }
-
-                  askOneMore();
-      }
-
-         
-      function two() {
-
-            if (asking <= 1) {
-                  alert('Загаданное число больше');
-                 
-                  function askOneMore() {
-                        let asking = confirm('Введите новый вариант');
-                              if (asking === true) {
-                                    return one();
-                              }
-                  }
-
-                  askOneMore();
-                  
-            }
-            
-            function three() {
-                  
-                  if (isNaN(parseFloat(asking)) || !isFinite(asking)) {
-                        alert('Введи чиcло!');
-
-                        function askOneMore() {
-                              let asking = confirm('Введите новый вариант');
-                                    if (asking === true) {
-                                          return one();
-                                    }
-                        }
-      
-                        askOneMore();
-                  }
-            }
-
-            three();
-      }
-
-      two();
-}
-
-one();
-    
-
+guessNumber(32); // (15) вызываем глобальную ф-ию guessNumber с параметром 32
