@@ -1,7 +1,7 @@
 'use strict';
 
 let isNumber = function(n) {
-      return !isNaN(parseFloat(n)) && isFinite(n)
+      return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
 let money,
@@ -22,11 +22,14 @@ let appData = {
       expenses: {},
       addExpenses: [],
       deposite: false,
-      mission: 2000000,
+      mission: 50000,
       period: 3,
+      budgetDay: 0,
+      budgetMonth: 0,
+      expensesMonth: 0,
       asking: function() {
-            let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую?');
-                  appData.addExpenses.toLowerCase().split(', ');
+            let addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую');
+                  appData.addExpenses = addExpenses.toLowerCase().split(', ');
                   appData.deposit = confirm('Есть ли у вас депозит в банке?');
 
                   appData.getExpensesMonth = function() {
@@ -35,14 +38,15 @@ let appData = {
 
                               for (let i = 0; i < 2; i++) {
 
-                                    do {answer1 = prompt('Введите обязательную статью расходов');
+                                    do {
+                                          answer1 = prompt('Введите обязательную статью расходов');
                                     }
-                                    while (isNaN(answer1) || answer1 === '' || answer1 === null)
+                                    while (!isNaN(answer1) || answer1.trim() === '' || answer1 === null);
 
                                     do{
-                                          answer2= prompt('Во сколько это обойдется?');
+                                          answer2 = prompt('Во сколько это обойдется?');
                                     }
-                                    while (isNumber(answer2));
+                                    while (!isNumber(answer2));
                         
                                     appData.expenses[answer1] = +answer2;
                               }     
@@ -50,25 +54,20 @@ let appData = {
       }
 };
  
-                            
-appData.budgetDay = 0;
-appData.budgetMonth = 0;
-appData.expensesMonth = 0;
 
 appData.getExpensesMonth = function() {
       for (let key in appData.expenses) {
             appData.expensesMonth += +appData.expenses[key];
       }
-            return;
-}
+      return;
+};
 
-let expensesMonth= appData.getExpensesMonth();
-
-console.log('Расходы за месяц: ' + expensesMonth);
+// appData.expensesMonth = appData.getExpensesMonth;
 
 appData.getBudget = function() {
       appData.budgetMonth = appData.budget - appData.expensesMonth;
       appData.budgetDay = Math.floor(appData.budgetMonth / 30);
+      return appData.budgetDay;
 };
 
 appData.getTargetMonth = function() {
@@ -80,13 +79,11 @@ appData.getTargetMonth = function() {
       }
 };
 
-console.log('Срок достижения цели: ' + appData.getTargetMonth() + ' месяцев');
-
 appData.getStatusIncome = function() {
 
-      if (appData.budgetDay > 1200) {
+      if (appData.budgetDay >= 1200) {
             return ('У вас высокий уровень дохода!');
-      } else if (appData.budgetDay >= 600 && appData.budgetDay <= 1200) {
+      } else if (appData.budgetDay >= 600 && appData.budgetDay < 1200) {
             return('У вас средний уровень дохода');
       } else if (appData.budgetDay < 600 && appData.budgetDay >= 0) {
             return('К сожалению у вас уровень дохода ниже среднего');
@@ -103,10 +100,15 @@ appData.getStatusIncome();
 
 console.log('Расходы за месяц: ' + appData.expensesMonth);
 
-console.log('Цель будет достигнута за период ' + appData.res + ' месяцев');
+console.log('Цель будет достигнута за период ' + appData.getTargetMonth + ' месяцев');
 
 console.log(appData.getStatusIncome());
  
-for (let key in appData){
-      console.log('Наша программа включает в себя данные:    свойства :  '+ key + '  значения ' + appData[key]);
+for (let key in appData) {
+      console.log('Наша программа включает в себя данные:    свойства :  '+ key + ' значения ' + appData[key]);
 }
+
+
+
+
+
