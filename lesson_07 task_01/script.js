@@ -13,7 +13,7 @@ let money,
             while (isNaN(money) || money === '' || money === null);
       };
 
-      start();
+      start();/
 
 let appData = {
       budget: money,
