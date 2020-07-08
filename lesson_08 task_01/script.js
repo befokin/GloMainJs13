@@ -10,7 +10,7 @@ let money,
             do {
                   money = prompt('Ваш месячный доход?', '1000');
             }
-            while (isNaN(money) || money === '' || money === null);
+            while (isNaN(money) || money.trim() === '' || money === null);
       };
 
       start();
